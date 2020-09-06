@@ -11,24 +11,22 @@ namespace FootballLeague.Models.MatchesVM
         public MatchViewModel(Match match)
         {
             match.MatchId = MatchId;
-            match.Goals = MatchGoals;
             match.Status = MatchStatus;
             match.Date = MatchDate;
 
             match.HomeTeam = HomeTeam;
+            match.HomeTeamScore = HomeTeamScore;
             match.AwayTeam = AwayTeam;
-
-            match.MatchResult = MatchResult;
+            match.AwayTeamScore = AwayTeamScore;
         }
 
         public int MatchId { get; set; }
         public MatchStatus MatchStatus { get; set; }
-        public int MatchGoals { get; set; }
         public DateTime MatchDate { get; set; }
 
         public string HomeTeam { get; set; }
+        public byte HomeTeamScore { get; set; }
         public string AwayTeam { get; set; }
-
-        public string MatchResult { get; set; }
+        public byte AwayTeamScore { get; set; }
     }
 }

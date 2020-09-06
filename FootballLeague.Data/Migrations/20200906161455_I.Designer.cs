@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FootballLeague.Data.Migrations
 {
     [DbContext(typeof(FootballLeagueContext))]
-    [Migration("20200906131007_I")]
+    [Migration("20200906161455_I")]
     partial class I
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,14 +31,17 @@ namespace FootballLeague.Data.Migrations
                     b.Property<string>("AwayTeam")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte>("AwayTeamScore")
+                        .HasColumnType("tinyint");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Goals")
-                        .HasColumnType("int");
-
                     b.Property<string>("HomeTeam")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("HomeTeamScore")
+                        .HasColumnType("tinyint");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -52,45 +55,50 @@ namespace FootballLeague.Data.Migrations
                         {
                             MatchId = 1,
                             AwayTeam = "Liverpool",
+                            AwayTeamScore = (byte)0,
                             Date = new DateTime(2020, 8, 11, 15, 14, 0, 0, DateTimeKind.Unspecified),
-                            Goals = 4,
                             HomeTeam = "Arsenal",
+                            HomeTeamScore = (byte)2,
                             Status = 0
                         },
                         new
                         {
                             MatchId = 2,
                             AwayTeam = "Arsenal",
+                            AwayTeamScore = (byte)0,
                             Date = new DateTime(2019, 5, 15, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Goals = 0,
                             HomeTeam = "Liverpool",
+                            HomeTeamScore = (byte)0,
                             Status = 1
                         },
                         new
                         {
                             MatchId = 3,
                             AwayTeam = "New B team",
+                            AwayTeamScore = (byte)0,
                             Date = new DateTime(2020, 11, 17, 18, 45, 0, 0, DateTimeKind.Unspecified),
-                            Goals = 0,
                             HomeTeam = "Chelsea",
+                            HomeTeamScore = (byte)0,
                             Status = 2
                         },
                         new
                         {
                             MatchId = 4,
-                            AwayTeam = "New B team",
+                            AwayTeam = "Manchester City",
+                            AwayTeamScore = (byte)1,
                             Date = new DateTime(2020, 8, 15, 20, 30, 0, 0, DateTimeKind.Unspecified),
-                            Goals = 3,
-                            HomeTeam = "New A team",
+                            HomeTeam = "Wolverhampton Wanderers",
+                            HomeTeamScore = (byte)1,
                             Status = 0
                         },
                         new
                         {
                             MatchId = 5,
                             AwayTeam = "Chelsea",
+                            AwayTeamScore = (byte)0,
                             Date = new DateTime(2020, 12, 1, 19, 30, 0, 0, DateTimeKind.Unspecified),
-                            Goals = 0,
                             HomeTeam = "Arsenal",
+                            HomeTeamScore = (byte)0,
                             Status = 2
                         });
                 });
@@ -117,19 +125,19 @@ namespace FootballLeague.Data.Migrations
                         {
                             TeamId = 1,
                             Name = "Arsenal",
-                            Scores = 3
+                            Scores = 2
                         },
                         new
                         {
                             TeamId = 2,
                             Name = "Liverpool",
-                            Scores = 1
+                            Scores = 0
                         },
                         new
                         {
                             TeamId = 3,
                             Name = "Chelsea",
-                            Scores = 3
+                            Scores = 0
                         },
                         new
                         {
@@ -254,17 +262,17 @@ namespace FootballLeague.Data.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3c803d26-2232-4d77-82cf-3d8386df8616",
+                            ConcurrencyStamp = "7e7e7a1f-0c7f-443c-b595-3c140cff9fc5",
                             Email = "admin@abv.bg",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ABV.BG",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENNRm66TEFatF1tB07Oaw+bwkdj7hCwynn2qBl2c8w9Yy3Cj62HIpq88ZhBsdZhALA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEVJK/J3Wxbg3ssyA8adeL+rLQLuBqc1un+NEbFIiKwvTVxq6+vWXXdlTFvXQ+IP0w==",
                             PhoneNumber = "+111111111",
                             PhoneNumberConfirmed = true,
                             Role = 0,
-                            SecurityStamp = "10b7b445-0f14-4cbe-997c-7466940b2747",
+                            SecurityStamp = "5ca39f3f-1223-4bf8-95b6-3ff9bcdc11b1",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -272,17 +280,17 @@ namespace FootballLeague.Data.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b52afc3a-e932-462b-a6bb-dd83a65de97d",
+                            ConcurrencyStamp = "dd97107b-10a1-4181-bb25-c33bf4ccefe0",
                             Email = "user@abv.bg",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@ABV.BG",
                             NormalizedUserName = "USER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMfilz7fy3U/OD31VlLiEddhyf1QSe8KneA3X+qbWL12Z6ozYOeltsTs3thPDBGCYw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHf036j06tuGphzstbga98/gy2S3vFagtG58HsrGRSm9OTlpg3q1mjse40Nbv9MqtQ==",
                             PhoneNumber = "+0895674532",
                             PhoneNumberConfirmed = true,
                             Role = 1,
-                            SecurityStamp = "adcc5a63-8eaf-4d15-9e24-d3cd6fac4b89",
+                            SecurityStamp = "97698d13-1c21-46f6-95f0-960dfd7492e2",
                             TwoFactorEnabled = false,
                             UserName = "user"
                         });
@@ -318,14 +326,14 @@ namespace FootballLeague.Data.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "1d6f6bb8-43d6-44b6-ad80-4aeefd99103d",
+                            ConcurrencyStamp = "9ab70f91-9381-4e44-80e6-b1817741897c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "d2cacef4-2def-40e1-b623-27807a1b27ac",
+                            ConcurrencyStamp = "375fb739-367d-4cde-9bfd-7c72d6d710cf",
                             Name = "user",
                             NormalizedName = "USER"
                         });

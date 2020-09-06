@@ -14,12 +14,11 @@ namespace FootballLeague.Mappers
                 MatchId = match.MatchId,
                 MatchStatus = match.Status,
                 MatchDate = match.Date,
-                MatchGoals = match.Goals,
 
                 AwayTeam = match.AwayTeam,
+                AwayTeamScore = match.AwayTeamScore,
                 HomeTeam = match.HomeTeam,
-
-                MatchResult = match.MatchResult,
+                HomeTeamScore = match.HomeTeamScore,
             };
 
             return matchModel;
@@ -34,12 +33,11 @@ namespace FootballLeague.Mappers
                 MatchId = matchVM.MatchId,
                 Date = matchVM.MatchDate,
                 Status = matchVM.MatchStatus,
-                Goals = matchVM.MatchGoals,
 
                 HomeTeam = matchVM.HomeTeam,
+                HomeTeamScore = matchVM.HomeTeamScore,
                 AwayTeam = matchVM.AwayTeam,
-
-                MatchResult = matchVM.MatchResult,
+                AwayTeamScore = matchVM.AwayTeamScore,
             };
 
             return matchModel;

@@ -11,21 +11,21 @@ namespace FootballLeague.Data.DatabaseSeeder
             {
                 TeamId = 1,
                 Name = "Arsenal",
-                Scores = 3,
+                Scores = 2,
             });
 
             modelBuilder.Entity<Team>().HasData(new Team
             {
                 TeamId = 2,
                 Name = "Liverpool",
-                Scores = 1,
+                Scores = 0,
             });
 
             modelBuilder.Entity<Team>().HasData(new Team
             {
                 TeamId = 3,
                 Name = "Chelsea",
-                Scores = 3,
+                Scores = 0,
             });
 
             modelBuilder.Entity<Team>().HasData(new Team

@@ -1,5 +1,6 @@
 ﻿using FootballLeague.Data.Context;
 using FootballLeague.Data.Entities;
+using FootballLeague.Data.Enums;
 using FootballLeague.Services.Contracts;
 using FootballLeague.Services.CustomException;
 using Microsoft.EntityFrameworkCore;
@@ -180,6 +181,52 @@ namespace FootballLeague.Services
                 throw new GlobalException(GlobalExceptionMessage.GlobalErrorMessage);
             }
         }
+        public async Task<Match> CheckIfTeamExcist(Match match)
+        {
+            Team cheskIfHomeTeamExcist = await GetTeamByNameAsync(match.HomeTeam);
+            Team cheskIfAwayTeamExcist = await GetTeamByNameAsync(match.AwayTeam);
+
+            if (cheskIfHomeTeamExcist == null)
+            {
+                Team newHomeTeam = await CreateTeamAsync(match.HomeTeam);
+                DistributeScores(match, newHomeTeam);
+            }
+            else
+            {
+                DistributeScores(match, cheskIfHomeTeamExcist);
+            }
+
+            if (cheskIfAwayTeamExcist == null)
+            {
+                Team newAwayTeam = await CreateTeamAsync(match.AwayTeam);
+                DistributeScores(match, newAwayTeam);
+            }
+            else
+            {
+                DistributeScores(match, cheskIfAwayTeamExcist);
+            }
+
+            return match;
+        }
+
+        public void DistributeScores(Match match, Team team)
+        {
+            if (match.AwayTeamScore > match.HomeTeamScore && match.Status == MatchStatus.finished)
+            {
+                team.Scores += 2;
+                _context.SaveChanges();
+            }
+            else if (match.HomeTeamScore > match.AwayTeamScore && match.Status == MatchStatus.finished)
+            {
+                team.Scores += 2;
+                _context.SaveChanges();
+            }
+            else if (match.HomeTeamScore == match.AwayTeamScore && match.Status == MatchStatus.finished)
+            {
+                team.Scores += 1;
+                _context.SaveChanges();
+            }
+        }
 
         public async Task<int> GetPageCount(int teamsPerPage)
         {
@@ -200,7 +247,6 @@ namespace FootballLeague.Services
 
             return newTeam;
         }
-
         public Team PassTeamParameters(string team)
         {
             var newTeam = new Team
@@ -210,11 +256,6 @@ namespace FootballLeague.Services
             };
 
             return newTeam;
-        }
-
-        public async Task<int> SumScoresFromMatches(int scores, string matchStatus)
-        {
-            return 3;
         }
     }
 }

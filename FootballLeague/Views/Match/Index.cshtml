@@ -25,10 +25,10 @@
             <tr>
                 <td><strong>Date</strong></td>
                 <td><strong>Home team</strong></td>
+                <td><strong></strong></td>
+                <td><strong></strong></td>
                 <td><strong>Away team</strong></td>
-                <td><strong>Goals</strong></td>
                 <td><strong>Status</strong></td>
-                <td><strong>Result</strong></td>
                 <td></td>
             </tr>
         </thead>
@@ -38,10 +38,10 @@
                 <tr>
                     <td>@match.MatchDate</td>
                     <td>@match.HomeTeam</td>
+                    <td>@match.HomeTeamScore :</td>
+                    <td>@match.AwayTeamScore</td>
                     <td>@match.AwayTeam</td>
-                    <td>@match.MatchGoals</td>
                     <td>@match.MatchStatus</td>
-                    <td>@match.MatchResult</td>
 
                     <td>
                         <form asp-controller="Match" asp-action="Edit" asp-route-id="@match.MatchId" method="post">

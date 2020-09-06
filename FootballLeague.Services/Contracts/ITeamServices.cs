@@ -15,7 +15,10 @@ namespace FootballLeague.Services.Contracts
         Task<Team> EditTeamAsync(Team team);
         Task<Team> DeleteTeamAsync(int teamId);
 
+        Task<Match> CheckIfTeamExcist(Match match);
         Task<IEnumerable<Team>> SearchTeam(string search, int currentPage);
+
+        void DistributeScores(Match match, Team team);
         Task<int> GetPageCount(int teamsPerPage);
     }
 }

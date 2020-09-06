@@ -55,8 +55,9 @@ namespace FootballLeague.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<DateTime>(nullable: false),
                     Status = table.Column<int>(nullable: false),
-                    Goals = table.Column<int>(nullable: false),
+                    HomeTeamScore = table.Column<byte>(nullable: false),
                     HomeTeam = table.Column<string>(nullable: true),
+                    AwayTeamScore = table.Column<byte>(nullable: false),
                     AwayTeam = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -213,8 +214,8 @@ namespace FootballLeague.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "1d6f6bb8-43d6-44b6-ad80-4aeefd99103d", "admin", "ADMIN" },
-                    { "2", "d2cacef4-2def-40e1-b623-27807a1b27ac", "user", "USER" }
+                    { "1", "9ab70f91-9381-4e44-80e6-b1817741897c", "admin", "ADMIN" },
+                    { "2", "375fb739-367d-4cde-9bfd-7c72d6d710cf", "user", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -222,20 +223,20 @@ namespace FootballLeague.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "3c803d26-2232-4d77-82cf-3d8386df8616", "admin@abv.bg", true, false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAENNRm66TEFatF1tB07Oaw+bwkdj7hCwynn2qBl2c8w9Yy3Cj62HIpq88ZhBsdZhALA==", "+111111111", true, 0, "10b7b445-0f14-4cbe-997c-7466940b2747", false, "admin" },
-                    { "2", 0, "b52afc3a-e932-462b-a6bb-dd83a65de97d", "user@abv.bg", true, false, null, "USER@ABV.BG", "USER", "AQAAAAEAACcQAAAAEMfilz7fy3U/OD31VlLiEddhyf1QSe8KneA3X+qbWL12Z6ozYOeltsTs3thPDBGCYw==", "+0895674532", true, 1, "adcc5a63-8eaf-4d15-9e24-d3cd6fac4b89", false, "user" }
+                    { "1", 0, "7e7e7a1f-0c7f-443c-b595-3c140cff9fc5", "admin@abv.bg", true, false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEEVJK/J3Wxbg3ssyA8adeL+rLQLuBqc1un+NEbFIiKwvTVxq6+vWXXdlTFvXQ+IP0w==", "+111111111", true, 0, "5ca39f3f-1223-4bf8-95b6-3ff9bcdc11b1", false, "admin" },
+                    { "2", 0, "dd97107b-10a1-4181-bb25-c33bf4ccefe0", "user@abv.bg", true, false, null, "USER@ABV.BG", "USER", "AQAAAAEAACcQAAAAEHf036j06tuGphzstbga98/gy2S3vFagtG58HsrGRSm9OTlpg3q1mjse40Nbv9MqtQ==", "+0895674532", true, 1, "97698d13-1c21-46f6-95f0-960dfd7492e2", false, "user" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Matches",
-                columns: new[] { "MatchId", "AwayTeam", "Date", "Goals", "HomeTeam", "Status" },
+                columns: new[] { "MatchId", "AwayTeam", "AwayTeamScore", "Date", "HomeTeam", "HomeTeamScore", "Status" },
                 values: new object[,]
                 {
-                    { 1, "Liverpool", new DateTime(2020, 8, 11, 15, 14, 0, 0, DateTimeKind.Unspecified), 4, "Arsenal", 0 },
-                    { 2, "Arsenal", new DateTime(2019, 5, 15, 11, 0, 0, 0, DateTimeKind.Unspecified), 0, "Liverpool", 1 },
-                    { 3, "New B team", new DateTime(2020, 11, 17, 18, 45, 0, 0, DateTimeKind.Unspecified), 0, "Chelsea", 2 },
-                    { 4, "New B team", new DateTime(2020, 8, 15, 20, 30, 0, 0, DateTimeKind.Unspecified), 3, "New A team", 0 },
-                    { 5, "Chelsea", new DateTime(2020, 12, 1, 19, 30, 0, 0, DateTimeKind.Unspecified), 0, "Arsenal", 2 }
+                    { 1, "Liverpool", (byte)0, new DateTime(2020, 8, 11, 15, 14, 0, 0, DateTimeKind.Unspecified), "Arsenal", (byte)2, 0 },
+                    { 2, "Arsenal", (byte)0, new DateTime(2019, 5, 15, 11, 0, 0, 0, DateTimeKind.Unspecified), "Liverpool", (byte)0, 1 },
+                    { 3, "New B team", (byte)0, new DateTime(2020, 11, 17, 18, 45, 0, 0, DateTimeKind.Unspecified), "Chelsea", (byte)0, 2 },
+                    { 4, "Manchester City", (byte)1, new DateTime(2020, 8, 15, 20, 30, 0, 0, DateTimeKind.Unspecified), "Wolverhampton Wanderers", (byte)1, 0 },
+                    { 5, "Chelsea", (byte)0, new DateTime(2020, 12, 1, 19, 30, 0, 0, DateTimeKind.Unspecified), "Arsenal", (byte)0, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -243,9 +244,9 @@ namespace FootballLeague.Data.Migrations
                 columns: new[] { "TeamId", "Name", "Scores" },
                 values: new object[,]
                 {
-                    { 1, "Arsenal", 3 },
-                    { 2, "Liverpool", 1 },
-                    { 3, "Chelsea", 3 },
+                    { 1, "Arsenal", 2 },
+                    { 2, "Liverpool", 0 },
+                    { 3, "Chelsea", 0 },
                     { 4, "Wolverhampton Wanderers", 1 },
                     { 5, "Manchester City", 1 }
                 });

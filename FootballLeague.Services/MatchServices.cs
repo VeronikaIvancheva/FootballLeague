@@ -31,7 +31,6 @@ namespace FootballLeague.Services
                 .Include(tm => tm.TeamMatches)
                 .OrderBy(d => d.Date)
                 .ThenBy(s => s.Status)
-                .ThenBy(g => g.Goals)
                 .FirstOrDefaultAsync(t => t.MatchId == matchId);
 
             if (match == null)
@@ -61,7 +60,6 @@ namespace FootballLeague.Services
             allMatches
                 .OrderBy(d => d.Date)
                 .ThenBy(s => s.Status)
-                .ThenBy(g => g.Goals)
                 .ToList();
 
             return allMatches;
@@ -71,18 +69,7 @@ namespace FootballLeague.Services
         #region =======Create, Edit, Delete Methods=======
         public async Task<Match> CreateMatchAsync(Match newMatch)
         {
-            Team cheskIfHomeTeamExcist = await _teamServices.GetTeamByNameAsync(newMatch.HomeTeam);
-            Team cheskIfAwayTeamExcist = await _teamServices.GetTeamByNameAsync(newMatch.AwayTeam);
-
-            if (cheskIfHomeTeamExcist == null)
-            {
-                await _teamServices.CreateTeamAsync(newMatch.HomeTeam);
-            }
-
-            if (cheskIfAwayTeamExcist == null)
-            {
-                await _teamServices.CreateTeamAsync(newMatch.AwayTeam);
-            }
+            await _teamServices.CheckIfTeamExcist(newMatch);
 
             try
             {
@@ -91,9 +78,7 @@ namespace FootballLeague.Services
                 await _context.Matches.AddAsync(match);
                 await _context.SaveChangesAsync();
 
-                _teamMatchServices.CreateTeamMatch(cheskIfHomeTeamExcist.TeamId, match.MatchId);
-                _teamMatchServices.CreateTeamMatch(cheskIfAwayTeamExcist.TeamId, match.MatchId);
-                await _context.SaveChangesAsync();
+                _teamMatchServices.HandleNewTeamMatchRequest(match);
 
                 return match;
             }
@@ -111,6 +96,8 @@ namespace FootballLeague.Services
             {
                 throw new ArgumentNullException(MatchesExceptionMessage.NoMatch);
             }
+
+            await _teamServices.CheckIfTeamExcist(match);
 
             try
             {
@@ -154,8 +141,9 @@ namespace FootballLeague.Services
             {
                 IEnumerable<Match> searchResult = _context.Matches
                     .Where(b => b.Status.ToString().Contains(search) ||
-                                b.Goals.ToString().Contains(search) ||
-                                b.Date.ToString().Contains(search));
+                                b.Date.ToString().Contains(search) ||
+                                b.AwayTeam.Contains(search) ||
+                                b.HomeTeam.Contains(search));
 
                 if (currentPage == 1)
                 {
@@ -196,12 +184,11 @@ namespace FootballLeague.Services
             {
                 Status = match.Status,
                 Date = match.Date,
-                Goals = match.Goals,
 
                 AwayTeam = match.AwayTeam,
+                AwayTeamScore = match.AwayTeamScore,
                 HomeTeam = match.HomeTeam,
-
-                MatchResult = match.MatchResult,
+                HomeTeamScore = match.HomeTeamScore,
             };
 
             return newMatch;

@@ -211,5 +211,10 @@ namespace FootballLeague.Services
 
             return newTeam;
         }
+
+        public async Task<int> SumScoresFromMatches(int scores, string matchStatus)
+        {
+            return 3;
+        }
     }
 }

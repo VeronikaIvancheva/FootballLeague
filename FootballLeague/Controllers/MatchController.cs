@@ -67,21 +67,6 @@ namespace FootballLeague.Controllers
             }
         }
 
-        public async Task<IActionResult> Detail(int Id)
-        {
-            try
-            {
-                Match match = await _matchServices.GetMatchAsync(Id);
-                MatchViewModel matchModel = MatchMapper.MapMatch(match);
-
-                return View("Detail", matchModel);
-            }
-            catch (GlobalException e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpGet]
         public IActionResult Create()
         {
@@ -106,7 +91,7 @@ namespace FootballLeague.Controllers
         }
 
         //За пълнене на формата със стойности
-        [HttpGet]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {

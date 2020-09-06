@@ -18,6 +18,8 @@ namespace FootballLeague.Mappers
 
                 AwayTeam = match.AwayTeam,
                 HomeTeam = match.HomeTeam,
+
+                MatchResult = match.MatchResult,
             };
 
             return matchModel;
@@ -36,6 +38,8 @@ namespace FootballLeague.Mappers
 
                 HomeTeam = matchVM.HomeTeam,
                 AwayTeam = matchVM.AwayTeam,
+
+                MatchResult = matchVM.MatchResult,
             };
 
             return matchModel;

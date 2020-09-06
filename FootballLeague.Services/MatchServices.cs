@@ -200,6 +200,8 @@ namespace FootballLeague.Services
 
                 AwayTeam = match.AwayTeam,
                 HomeTeam = match.HomeTeam,
+
+                MatchResult = match.MatchResult,
             };
 
             return newMatch;

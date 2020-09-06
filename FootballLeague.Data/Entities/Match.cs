@@ -14,6 +14,8 @@ namespace FootballLeague.Data.Entities
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }
 
+        public string MatchResult { get; set; }
+
         public ICollection<TeamMatches> TeamMatches { get; set; }
     }
 }

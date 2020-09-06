@@ -17,6 +17,8 @@ namespace FootballLeague.Models.MatchesVM
 
             match.HomeTeam = HomeTeam;
             match.AwayTeam = AwayTeam;
+
+            match.MatchResult = MatchResult;
         }
 
         public int MatchId { get; set; }
@@ -26,5 +28,7 @@ namespace FootballLeague.Models.MatchesVM
 
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }
+
+        public string MatchResult { get; set; }
     }
 }

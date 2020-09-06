@@ -28,6 +28,7 @@
                 <td><strong>Away team</strong></td>
                 <td><strong>Goals</strong></td>
                 <td><strong>Status</strong></td>
+                <td><strong>Result</strong></td>
                 <td></td>
             </tr>
         </thead>
@@ -40,11 +41,8 @@
                     <td>@match.AwayTeam</td>
                     <td>@match.MatchGoals</td>
                     <td>@match.MatchStatus</td>
+                    <td>@match.MatchResult</td>
 
-                    @*Не парсва правилното Id*@
-                    @*<td>
-                        <partial name="_EditMatchPartialView" , model="new MatchViewModel { MatchId = match.MatchId}" />
-                        </td>*@
                     <td>
                         <form asp-controller="Match" asp-action="Edit" asp-route-id="@match.MatchId" method="post">
                             <button type="submit" class="btn btn-primary btn-sm btn-block">Edit</button>

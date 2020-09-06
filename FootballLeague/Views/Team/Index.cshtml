@@ -34,11 +34,6 @@
                 <tr>
                     <td>@team.TeamName</td>
                     <td>@team.TeamScores</td>
-
-                    @*Не парсва правилното Id*@
-                    <td>
-                    <partial name="_EditTeamPartialView" , model="new TeamViewModel { TeamId = team.TeamId}" />
-                    </td>
                     <td>
                         <form asp-controller="Team" asp-action="Edit" asp-route-id="@team.TeamId" method="post">
                             <button type="submit" class="btn btn-primary btn-sm btn-block">Edit</button>

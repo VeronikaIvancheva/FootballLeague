@@ -1,0 +1,87 @@
+﻿@model MatchIndexViewMode
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section>
+    <h3 class="mb-4 tm-text-color-primary">Matches's list</h3>
+
+    <form asp-action="Index" asp-controller="Match" method="post">
+        <div class="input-group mb-1">
+            <input type="text" name="search" id="search" class="btn btn-outline-primary" />
+            <div class="input-group-append btn">
+                <input type="submit" value="Search" class="btn btn-outline-primary" />
+            </div>
+        </div>
+    </form>
+
+    <p></p>
+    <partial name="_CreateMatchPartialView" , model="new MatchViewModel { }" />
+    <p></p>
+
+    <table>
+        <thead>
+            <tr>
+                <td><strong>Date</strong></td>
+                <td><strong>Home team</strong></td>
+                <td><strong>Away team</strong></td>
+                <td><strong>Goals</strong></td>
+                <td><strong>Status</strong></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var match in @Model.Matches)
+            {
+                <tr>
+                    <td>@match.MatchDate</td>
+                    <td>@match.HomeTeam</td>
+                    <td>@match.AwayTeam</td>
+                    <td>@match.MatchGoals</td>
+                    <td>@match.MatchStatus</td>
+
+                    @*Не парсва правилното Id*@
+                    @*<td>
+                        <partial name="_EditMatchPartialView" , model="new MatchViewModel { MatchId = match.MatchId}" />
+                        </td>*@
+                    <td>
+                        <form asp-controller="Match" asp-action="Edit" asp-route-id="@match.MatchId" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-controller="Match" asp-action="Delete" asp-route-id="@match.MatchId" method="post">
+                            <button type="submit" class="btn btn-primary btn-sm btn-block">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p></p>
+    <div class="align-content-center">
+        @if (Model.PreviousPage == null)
+        {
+            <a class="btn btn-sm btn-outline-secondary btn-auto disabled">Prev</a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-route-currentPage="@Model.PreviousPage" class="btn btn-sm btn-outline-secondary btn-auto previous-pagination-button-table" at="@Model.PreviousPage">Prev</a>
+            <a asp-action="Index" asp-route-currentPage="@Model.PreviousPage" class="btn btn-sm btn-outline-secondary btn-auto previous-pagination-button-table" at="@Model.PreviousPage">@Model.PreviousPage</a>
+        }
+
+        <button class="btn btn-sm btn-outline-secondary">@Model.CurrentPage</button>
+
+        @if (Model.NextPage == null)
+        {
+            <a class="btn btn-sm btn-outline-secondary btn-auto disabled">Next</a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-route-currentPage="@Model.NextPage" class="btn btn-sm btn-outline-secondary btn-auto previous-pagination-button-table" at="@Model.NextPage">@Model.NextPage</a>
+            <a asp-action="Index" asp-route-currentPage="@Model.NextPage" class="btn btn-sm btn-outline-secondary btn-auto next-pagination-button-table" at="@Model.NextPage">Next</a>
+        }
+    </div>
+</section>

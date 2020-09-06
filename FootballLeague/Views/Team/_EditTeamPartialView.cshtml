@@ -1,0 +1,39 @@
+﻿@model TeamViewModel
+
+<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#exampleModal">
+    Edit
+</button>
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit @Model.TeamName</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" asp-controller="Team" asp-action="EditTeam" asp-route-TeamId="@Model.TeamId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="TeamId" value="@Model.TeamId" type="hidden" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeamName" class="control-label">New name:</label>
+                        <input asp-for="TeamName" class="form-control" />
+                        <span asp-validation-for="TeamName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TeamScores" class="control-label">New score:</label>
+                        <input asp-for="TeamScores" class="form-control" />
+                        <span asp-validation-for="TeamScores" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿@model MatchViewModel
+
+<button type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#exampleModal">
+    Create
+</button>
+
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new team</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form enctype="multipart/form-data" asp-controller="Match" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="MatchDate" class="control-label"><strong>Date:</strong></label>
+                        <input asp-for="MatchDate" class="form-control" />
+                        <span asp-validation-for="MatchDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HomeTeam" class="control-label"><strong>Home team:</strong></label>
+                        <input asp-for="HomeTeam" class="form-control" />
+                        <span asp-validation-for="HomeTeam" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AwayTeam" class="control-label"><strong>Away team:</strong></label>
+                        <input asp-for="AwayTeam" class="form-control" />
+                        <span asp-validation-for="AwayTeam" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-1">
+                        <label asp-for="MatchStatus"><strong>Status:</strong></label>
+                        <div class="row">
+                            <select name="MatchStatus">
+                                <option value="upcoming">upcoming</option>
+                                <option value="ongoing">ongoing</option>
+                                <option value="canceled">canceled</option>
+                                <option value="finished">finished</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

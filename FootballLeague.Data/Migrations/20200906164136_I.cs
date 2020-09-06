@@ -39,8 +39,7 @@ namespace FootballLeague.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Role = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -210,24 +209,6 @@ namespace FootballLeague.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "1", "9ab70f91-9381-4e44-80e6-b1817741897c", "admin", "ADMIN" },
-                    { "2", "375fb739-367d-4cde-9bfd-7c72d6d710cf", "user", "USER" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { "1", 0, "7e7e7a1f-0c7f-443c-b595-3c140cff9fc5", "admin@abv.bg", true, false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEEVJK/J3Wxbg3ssyA8adeL+rLQLuBqc1un+NEbFIiKwvTVxq6+vWXXdlTFvXQ+IP0w==", "+111111111", true, 0, "5ca39f3f-1223-4bf8-95b6-3ff9bcdc11b1", false, "admin" },
-                    { "2", 0, "dd97107b-10a1-4181-bb25-c33bf4ccefe0", "user@abv.bg", true, false, null, "USER@ABV.BG", "USER", "AQAAAAEAACcQAAAAEHf036j06tuGphzstbga98/gy2S3vFagtG58HsrGRSm9OTlpg3q1mjse40Nbv9MqtQ==", "+0895674532", true, 1, "97698d13-1c21-46f6-95f0-960dfd7492e2", false, "user" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Matches",
                 columns: new[] { "MatchId", "AwayTeam", "AwayTeamScore", "Date", "HomeTeam", "HomeTeamScore", "Status" },
                 values: new object[,]
@@ -249,15 +230,6 @@ namespace FootballLeague.Data.Migrations
                     { 3, "Chelsea", 0 },
                     { 4, "Wolverhampton Wanderers", 1 },
                     { 5, "Manchester City", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "UserId", "RoleId" },
-                values: new object[,]
-                {
-                    { "1", "1" },
-                    { "2", "2" }
                 });
 
             migrationBuilder.InsertData(

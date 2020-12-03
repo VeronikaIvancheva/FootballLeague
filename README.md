@@ -4,7 +4,7 @@ Simple web application that allows the tracking of football leagues matches as w
 ## Technologies
 * ASP.NET Core MVC
 * Entity Framework Core
+* C#
 * MS SQL Server
-* Razor
 * HTML
 * CSS
